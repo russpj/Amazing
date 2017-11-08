@@ -29,51 +29,106 @@ def init2dArray(x, y, value = ''):
 # Main program entry point
 
 def main():
-	H = 0
-	V = 0
+	def h = 0
+	def w = 0
 
-	while(H < 2 and V < 2):
-		H, V = input("What are your width and length (width,length): ").split(',')
-		H = int(H)
-		V = int(V)
-		if H < 2 and V < 2:
+	while(h < 2 and w < 2):
+		h, w = input("What are your width and length (width,length): ").split(',')
+		h = int(h)
+		w = int(w)
+		if h < 2 and w < 2:
 			print("Meaningless dimensions. Try again.")
-	W = init2dArray(H, V)
-	U = init2dArray(H, V)
+	V = init2dArray(h, w)
+	U = init2dArray(h, w)
 	print("\n\n\n\n")
 	Q = 0
 	Z = 0
-	X = random.randint(1, H)
-	for I in range(H):
+	# Print the top row
+	X = random.randint(1, h)
+	for I in range(h):
 		if I == X:
 			print(".  ")
 		else:
 			print(".--")
+	#endLoop
 	print(".")
 	C = 1
-	W[X][1] = C
+	V[X][1] = C
 	C += 1
 	#200
 	R = X
 	S = 1
-	#260/265
-	if R - 1 == 0 or W[R - 1][S] != 0:
-		if S - 1 == 0 or W[R][S - 1] != 0:
-			if R == H:
-				if S != V:
-					if W[R][S + 1] != 0:
-						while R != H:
-							R += 1
-							if W[R][S] != 0:
-								break
-		elif R == H or W[R + 1][S] != 0:
+	if R - 1 == 0 or V[R - 1][S] != 0: #260/265
+		if S - 1 == 0 or V[R][S - 1] != 0: #530/540
+			if R == h or V[R+1][S] != 0: #670/680
+				if S != w: #740
+					if V[R][S + 1] != 0: #760
+						#780: GOTO 1000
+						#1000: GOTO 210
+						while R != h: #210
+							R += 1 #240
+							if V[R][S] == 0: #250
+								continue #GOTO 210
+							else:
+								if R - 1 == 0: #260
+									if S - 1 == 0: #530
+										if R == h: #670
+											if S != w: #740
+												if V[R][S+1] != 0: #760
+													continue #GOTO 780
+												else:
+													if Q == 1: #910
+														Z = 1 #960
+														if w[R][S] == 0: #970
+															w[R][S] = 1 #980
+															Q = 0
+															R = 1
+															S = 1
+															#TODO: GOTO 250
+														else:
+															w[R][S] = 3 #975
+															Q = 0
+															continue #GOTO 1000
+													else:
+														V[R][S+1] = C #920
+														C += 1
+														if w[R][S] == 0:
+															w[R][S] = 1 #940
+															S += 1 #950
+															if C == h * w + 1:
+																for J in range(w): #1010
+																	print("I") #1011
+																	for I in range(h): #1012
+																		if w[I][J] < 2: #1013
+																			print("  I") #1030
+																		else:
+																			print("   ") #1020
+																	print("\n") #1041
+																	for I in range(h): #1043
+																		if w[I][J] == 0 or w[I][J] == 2: #1045/1050
+																			print(":--") #1060
+																		else:
+																			print(":  ") #1051
+																	print(".")#1071
+																	#1073 END
+															#else: GOTO 260
+														else:
+															w[R][S] = 3 #930
+															#GOTO 950
+											else:
+												if Z == 1: #750
+													continue #GOTO 780
+												else:
+													Q = 1 #755
+
+		elif R == h or V[R + 1][S] != 0:
 			#610
-			if S != V:
+			if S != w:
 				#630
-				if W[R][S + 1] != 0:
+				if V[R][S + 1] != 0:
 					#660 - goto 820
 					#820
-					W[R][S - 1] = C
+					V[R][S - 1] = C
 					C += 1
 					#840
 				else:
@@ -83,7 +138,7 @@ def main():
 			elif Z == 1:
 				#660 - goto 820
 				#820
-				W[R][S - 1] = C
+				V[R][S - 1] = C
 				C += 1
 				#840
 			else:
@@ -91,9 +146,9 @@ def main():
 				#640
 				X = random.randint(1, 2)
 				#650
-		elif S != V:
+		elif S != w:
 			#560
-			if W[R][S + 1] != 0:
+			if V[R][S + 1] != 0:
 				#590
 				X = random.randint(1, 2)
 				#600
@@ -109,35 +164,35 @@ def main():
 			Q = 1
 			#570
 	#270/280
-	elif S - 1 == 0 or W[R][S - 1] != 0:
-		if R == H:
-			if S != V:
-				if W[R][S + 1] != 0:
-					W[R - 1][S] == C
+	elif S - 1 == 0 or V[R][S - 1] != 0:
+		if R == h:
+			if S != w:
+				if V[R][S + 1] != 0:
+					V[R - 1][S] == C
 					C += 1
 					U[R - 1][S] = 2
 					R -= 1
-					if C == H * V + 1:
-						for J in range(V):
+					if C == h * w + 1:
+						for J in range(w):
 							print("I")
-							for I in range(H):
+							for I in range(h):
 								if U[I][J] < 2:
 									print("  I")
 								else:
 									print("   ")
 							print("\n")
-							for I in range(H):
+							for I in range(h):
 								if U[I][J] == 0 or U[I][J] == 2:
 									print(":--")
 								else:
 									print(":  ")
 							print(".")
 	#290/300
-	elif R == H or W[R + 1][S] != 0:
+	elif R == h or V[R + 1][S] != 0:
 		#330
-		if S != V:
+		if S != w:
 			#340
-			if W[R][S + 1] != 0:
+			if V[R][S + 1] != 0:
 				#370
 				X = random.randint(1, 2)
 				#380
